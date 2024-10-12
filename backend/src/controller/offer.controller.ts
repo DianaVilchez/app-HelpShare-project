@@ -50,3 +50,29 @@ export const getOffers = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ message: "Error fetching offers" });
   }
 };
+
+// Actualizar una oferta
+export const updateOffer = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const { title, description, category } = req.body;
+  
+      const offer = await Offer.findByPk(id);
+      if (!offer) {
+        res.status(404).json({ message: 'Offer not found' });
+        return;
+      }
+  
+      // Actualizar la oferta con los nuevos valores
+      await offer.update({
+        title,
+        description,
+        category,
+      });
+  
+      res.status(200).json(offer);
+    } catch (error) {
+      console.error("Error updating offer:", error);
+      res.status(500).json({ message: 'Error updating offer' });
+    }
+  };
