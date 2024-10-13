@@ -139,12 +139,19 @@ export const searchOffers = async (
 
     // Realizamos la búsqueda en el título de las ofertas
     const offers = await Offer.findAll({
-      where: {
+      where: {  
         title: {
           [Op.like]: `%${query}%`, // Buscamos las ofertas cuyo título contenga la palabra clave
         },
       },
+      include: [
+        {
+          model: User,
+          attributes: ["username"], // Solo devuelve el campo 'username' del usuario
+        },
+      ],
     });
+    console.log(offers, "offers");   
 
     res.status(200).json(offers); 
   } catch (error) {
@@ -158,13 +165,12 @@ export const getOfferById = async (req: Request, res: Response): Promise<any> =>
   try {
     const { id_user } = req.params;
     const offer = await Offer.findAll({where:{id_user}});
-    console.log("🚀 ~ getOfferById ~ offer:", offer)
     // if (!offer) {
     //   return res.status(404).json({ message: 'Offer not found' });
     // }
     res.status(200).json(offer);
   } catch (error) {
     console.error("Error fetching offer by ID:", error);
-    res.status(500).json({ message: 'Error fetching offer by ID' });
+    res.status(500).json({ message: 'Error fetching controller offer by ID' });
   }
 };

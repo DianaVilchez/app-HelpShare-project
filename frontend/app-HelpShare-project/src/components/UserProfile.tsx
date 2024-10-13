@@ -14,6 +14,7 @@ export const UserProfile = () => {
   const { username } = useParams<{ username: string }>(); // Obtener el nombre del usuario desde la URL.
   const savedDescription = localStorage.getItem("description");
   const [products, setProducts] = useState<Product[]>([]); // Estado para los productos.
+  const [id_user, setId_user] = useState<number>(1); // Declaración de id_user
 
   // Instanciamos la función para obtener los productos.
   const { offerConnection } = DescriptionConnection();
@@ -42,7 +43,7 @@ export const UserProfile = () => {
           </Link>
         </button>
         <button className="buttonSearch">
-          <Link to="/formOffer" className="linkStyle" style={{ textDecoration: 'none' }}>
+          <Link to={`/formOffer/${id_user}`} className="linkStyle" style={{ textDecoration: 'none' }}>
             Ofrecer ayuda
           </Link>
         </button>

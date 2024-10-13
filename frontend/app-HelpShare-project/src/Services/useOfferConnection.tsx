@@ -1,5 +1,4 @@
 import { OfferData } from "../models/dataLogin";
-
 export const useOfferConnection = () => {
   const offerConnection = async (id_user: number, offerData: Omit<OfferData, 'id_user'>) => {
     try {
@@ -10,11 +9,9 @@ export const useOfferConnection = () => {
         },
         body: JSON.stringify(offerData),
       });
-
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status}`);
       }
-
       const data = await response.json();
       console.log("Oferta creada:", data);
       return data;
@@ -23,6 +20,5 @@ export const useOfferConnection = () => {
       alert(`Error: ${(error as Error).message}`);
     }
   };
-
   return { offerConnection };
 };

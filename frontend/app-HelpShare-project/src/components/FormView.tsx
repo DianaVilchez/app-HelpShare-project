@@ -62,7 +62,7 @@ export const FormView = ({
             className="buttonSubmit"
             type="submit"
             onClick={onSubmitOffer}
-          >
+          > 
             Crear Oferta
           </button>
         </section>
