@@ -1,19 +1,24 @@
 import { Route, Routes } from "react-router-dom";
 import { LoginUser } from "./components/LoginUser";
 import { UserProfile } from "./components/UserProfile";
-import { Search } from "./components/Search";
+import { Search } from "./components/Search"
 import { FormOffers } from "./components/FormOffers";
-// import { Register } from "./components/Register";
+import { FormUser } from "./components/FormUser";
+
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/login" element={<LoginUser />} />
-        {/* <Route path="/register" element={<Register />} /> */}
-        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/profile/:username" element={<UserProfile />} />
         <Route path="/search"element={<Search />} />
+
         <Route path="/formOffer/:id_user" element={<FormOffers />} />
+        <Route path="/register" element={<FormUser/>} />
+        <Route path="/formOffer" element={<FormOffers />} />
+        <Route path="/formUser" element={<FormUser />} />
+
       </Routes>
     </div>
   );
