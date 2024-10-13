@@ -42,7 +42,7 @@ const [isAlertShown, setIsAlertShown] = useState<boolean>(false);
       localStorage.setItem("description",data.description)
       console.log(data.descripción)
       setIsAlertShown(false);
-      navigate(`/profile/${data.username}`); // Aquí usas navigate del hook
+      navigate(`/profile/${data.username} ${data.descripción}`); // Aquí usas navigate del hook
     } catch (error) {
       console.error("Error durante el login", (error as Error).message);
     }

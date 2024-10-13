@@ -11,7 +11,7 @@ export const LoginUser = () => {
 //   const { loginConnection } = useLoginConnection();
 
   const handleLogin = async () => {
-    console.log("Datos enviados:", email, password);
+    console.log("Datos enviados:", email, password, descripción);
     // Llamamos a la función loginConnection pasando email y password
     await loginConnection({ email, password });
     if (errorMessage) {

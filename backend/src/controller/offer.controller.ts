@@ -137,7 +137,6 @@ export const getOfferById = async (req: Request, res: Response): Promise<any> =>
     const { id_user } = req.params;
     const offer = await Offer.findAll({where:{id_user}});
     console.log("🚀 ~ getOfferById ~ offer:", offer)
-
     // if (!offer) {
     //   return res.status(404).json({ message: 'Offer not found' });
     // }
