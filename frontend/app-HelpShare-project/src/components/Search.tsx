@@ -53,9 +53,9 @@ export const Search = () => {
         <ul className="offers-list">
           {offers.map((offer, index) => (
             <li key={index} className="list">
-              <h3>{offer.title}</h3> {/* Muestra el título de la oferta */}
+              <h3>{offer.title}</h3> 
               <h1>{offer.username}</h1>
-              <p>{offer.User.username}</p> {/* Muestra la descripción de la oferta */}
+              <p>{offer.description}</p> 
             </li>
           ))}
         </ul>

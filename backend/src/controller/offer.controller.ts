@@ -3,35 +3,27 @@ import Offer from "../models/Offers.models";
 import User from "../models/Users.models";
 import { Op } from "sequelize";
 
-// Crear una nueva oferta
-export const createOffer = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
+export const createOffer = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { title, description, category, id_user } = req.body;
-
-    // Validar que el usuario existe
-    const user = await User.findByPk(id_user);
-    if (!user) {
-      res.status(404).json({ message: "Usuario no encontrado" });
-      return;
-    }
+    const { title, description, category } = req.body;
+    const { id_user } = req.params; // Obtenemos id_user desde la URL
 
     const newOffer = await Offer.create({
       title,
       description,
       category,
-      id_user, // Asociar la oferta al usuario que la creó
+      id_user,  // Usamos id_user de los parámetros
     });
-    // console.log("🚀 ~ newOffer:", newOffer)
-
-    res.status(200).json(newOffer);
+    console.log(newOffer);
+    
+    res.status(201).json(newOffer);
   } catch (error) {
-    console.error("Error al crear la oferta:", error);
-    res.status(500).json({ message: "Error al crear la oferta" });
+    console.log(error);
+    
+    res.status(500).json({ message: 'Error al crear la oferta' });
   }
 };
+
 
 // Obtener todas las ofertas
 export const getOffers = async (req: Request, res: Response): Promise<void> => {
@@ -103,30 +95,39 @@ export const deleteOffer = async (
   }
 };
 
-  export const searchOffers = async (
-    req: Request,
-    res: Response
-  ): Promise<void> => {
-    try {
-      const { query } = req.query; // Obtenemos la palabra clave de la query string 
-      if (!query) {
-        res.status(400).json({ message: "Falta el parámetro de consulta" });
-        return;
-      }
-      // Realizamos la búsqueda en el título de las ofertas
-      const offers = await Offer.findAll({
-        where: {
-          title: {
-            [Op.like]: `%${query}%`, // Buscamos las ofertas cuyo título contenga la palabra clave
-          },
-        },
-      });
-      res.status(200).json(offers); 
-    } catch (error) {
-      console.error("Error al buscar ofertas:", error);
-      res.status(500).json({ message: "Error al buscar ofertas" });
+export const searchOffers = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { query } = req.query; // Obtenemos la palabra clave de la query string 
+
+    if (!query) {
+      res.status(400).json({ message: "Falta el parámetro de consulta" });
+      return;
     }
-  
+
+    // Realizamos la búsqueda en el título de las ofertas
+    const offers = await Offer.findAll({
+      where: {  
+        title: {
+          [Op.like]: `%${query}%`, // Buscamos las ofertas cuyo título contenga la palabra clave
+        },
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["username"], // Solo devuelve el campo 'username' del usuario
+        },
+      ],
+    });
+    console.log(offers, "offers");   
+
+    res.status(200).json(offers); 
+  } catch (error) {
+    console.error("Error al buscar ofertas:", error);
+    res.status(500).json({ message: "Error al buscar ofertas" });
+  }
 };
 
 // Obtener una oferta por ID 
@@ -134,14 +135,12 @@ export const getOfferById = async (req: Request, res: Response): Promise<any> =>
   try {
     const { id_user } = req.params;
     const offer = await Offer.findAll({where:{id_user}});
-    console.log("🚀 ~ getOfferById ~ offer:", offer)
-
     // if (!offer) {
     //   return res.status(404).json({ message: 'Offer not found' });
     // }
     res.status(200).json(offer);
   } catch (error) {
     console.error("Error fetching offer by ID:", error);
-    res.status(500).json({ message: 'Error fetching offer by ID' });
+    res.status(500).json({ message: 'Error fetching controller offer by ID' });
   }
 };
