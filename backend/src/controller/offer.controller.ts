@@ -103,30 +103,28 @@ export const deleteOffer = async (
   }
 };
 
-export const searchOffers = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const { query } = req.query; // Obtenemos la palabra clave de la query string 
-
-    if (!query) {
-      res.status(400).json({ message: "Falta el parámetro de consulta" });
-      return;
-    }
-
-    // Realizamos la búsqueda en el título de las ofertas
-    const offers = await Offer.findAll({
-      where: {
-        title: {
-          [Op.like]: `%${query}%`, // Buscamos las ofertas cuyo título contenga la palabra clave
+  export const searchOffers = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const { query } = req.query; // Obtenemos la palabra clave de la query string 
+      if (!query) {
+        res.status(400).json({ message: "Falta el parámetro de consulta" });
+        return;
+      }
+      // Realizamos la búsqueda en el título de las ofertas
+      const offers = await Offer.findAll({
+        where: {
+          title: {
+            [Op.like]: `%${query}%`, // Buscamos las ofertas cuyo título contenga la palabra clave
+          },
         },
-      },
-    });
-
-    res.status(200).json(offers); 
-  } catch (error) {
-    console.error("Error al buscar ofertas:", error);
-    res.status(500).json({ message: "Error al buscar ofertas" });
-  }
+      });
+      res.status(200).json(offers); 
+    } catch (error) {
+      console.error("Error al buscar ofertas:", error);
+      res.status(500).json({ message: "Error al buscar ofertas" });
+    }
+  
 };
