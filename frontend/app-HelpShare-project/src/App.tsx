@@ -1,17 +1,18 @@
-import './App.css'
-import { Route, Routes } from "react-router-dom"
-import { Login } from "./components/login"
-import { Register } from './components/Register'
+import { Route, Routes } from "react-router-dom";
+import { Register } from "./components/Register";
+import { LoginUser } from "./components/LoginUser";
+import { UserProfile } from "./components/UserProfile";
+
 function App() {
   return (
-  <div className="App">
-    <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register"element={<Register />} />
-          </Routes>
-  </div>
-   
-  )
+    <div className="App">
+      <Routes>
+        <Route path="/login" element={<LoginUser />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<UserProfile />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
