@@ -6,6 +6,7 @@ import './styles/register.css'
 import './styles/search.css'
 import './styles/profile.css'
 import './styles/formOffers.css'
+import './styles/home.css'
 
 import App from "./App.tsx";
 
