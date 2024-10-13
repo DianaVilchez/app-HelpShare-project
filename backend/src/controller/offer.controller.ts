@@ -3,35 +3,57 @@ import Offer from "../models/Offers.models";
 import User from "../models/Users.models";
 import { Op } from "sequelize";
 
-// Crear una nueva oferta
-export const createOffer = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  try {
-    const { title, description, category, id_user } = req.body;
+// // Crear una nueva oferta
+// export const createOffer = async (
+//   req: Request,
+//   res: Response
+// ): Promise<void> => {
+//   try {
+//     const { title, description, category, id_user } = req.body;
 
-    // Validar que el usuario existe
-    const user = await User.findByPk(id_user);
-    if (!user) {
-      res.status(404).json({ message: "Usuario no encontrado" });
-      return;
-    }
+//     //Validar que el usuario existe
+//     const user = await User.findByPk(id_user);
+//     if (!user) {
+//       res.status(404).json({ message: "Usuario no encontrado" });
+//       return;
+//     }
+
+//     const newOffer = await Offer.create({
+//       title,
+//       description,
+//       category,
+//       id_user,
+//     });
+//     // console.log("🚀 ~ newOffer:", newOffer)
+
+//     res.status(200).json(newOffer);
+//   } catch (error) {
+//     console.error("Error al crear la oferta:", error);
+//     res.status(500).json({ message: "Error al crear la oferta" });
+//   }
+// };
+
+export const createOffer = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { title, description, category } = req.body;
+    const { id_user } = req.params; // Obtenemos id_user desde la URL
 
     const newOffer = await Offer.create({
       title,
       description,
       category,
-      id_user, // Asociar la oferta al usuario que la creó
+      id_user,  // Usamos id_user de los parámetros
     });
-    // console.log("🚀 ~ newOffer:", newOffer)
-
-    res.status(200).json(newOffer);
+    console.log(newOffer);
+    
+    res.status(201).json(newOffer);
   } catch (error) {
-    console.error("Error al crear la oferta:", error);
-    res.status(500).json({ message: "Error al crear la oferta" });
+    console.log(error);
+    
+    res.status(500).json({ message: 'Error al crear la oferta' });
   }
 };
+
 
 // Obtener todas las ofertas
 export const getOffers = async (req: Request, res: Response): Promise<void> => {
