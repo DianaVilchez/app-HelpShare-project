@@ -1,12 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
+interface User {
+    username: string;
+  }
 interface Offer {
   id: number;
   title: string;
   description: string;
-  username: string;
+  User: User;
 }
 
 export const Search = () => {
@@ -54,7 +57,9 @@ export const Search = () => {
           {offers.map((offer, index) => (
             <li key={index} className="list">
               <h3>{offer.title}</h3> 
-              <h1>{offer.username}</h1>
+               <Link to={`/profile/${offer.User.username}`}>
+                <h1>{offer.User.username}</h1>
+              </Link>
               <p>{offer.description}</p> 
             </li>
           ))}

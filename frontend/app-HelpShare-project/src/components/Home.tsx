@@ -5,7 +5,7 @@ export const Home = () => {
     <>
       <section className="backgroundHome">
         <img src={logo} className="logoHome" />
-        <div> DESCRIPCION APP</div>
+        <div className="descriptionApp"> Ofrece y recibe ayuda de forma voluntaria. Con nuestra app, puedes ofrecer tus conocimientos y habilidades para apoyar a otros, o encontrar ayuda en áreas como educación, salud y más, todo sin ningún intercambio monetario. ¡Únete a nuestra comunidad y marca la diferencia!</div>
         <button className="iniciar">
           <Link to="/login" className="linkStyle">
             Iniciar
