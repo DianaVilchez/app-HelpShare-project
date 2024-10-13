@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Register } from "../models/casa";
 import { useRegisterConnection } from "../Services/registerConnection";
 
-export const RegisterUser:any = () => {
+export const RegisterUser = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [username, setUsername] = useState<string>('');
