@@ -1,9 +1,9 @@
 import { OfferData } from "../models/dataLogin";
 
 export const useOfferConnection = () => {
-  const offerConnection = async (offerData: OfferData) => {
+  const offerConnection = async (id_user: number, offerData: Omit<OfferData, 'id_user'>) => {
     try {
-      const response = await fetch("http://localhost:2000/api/offers", {
+      const response = await fetch(`http://localhost:2000/api/offers/${id_user}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

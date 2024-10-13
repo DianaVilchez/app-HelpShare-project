@@ -3,7 +3,7 @@ import { createOffer, getOffers, updateOffer, deleteOffer, searchOffers, getOffe
 
 const routerOffers: Router = express.Router();
 
-routerOffers.post('/', createOffer);
+routerOffers.post('/:id_user', createOffer);
 routerOffers.get('/', getOffers);
 routerOffers.get('/:id_user', getOfferById);
 routerOffers.put('/:id', updateOffer);
