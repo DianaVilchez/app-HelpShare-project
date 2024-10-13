@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { LoginUser } from "./components/LoginUser";
 import { UserProfile } from "./components/UserProfile";
 import { Search } from "./components/Search";
-import { FormUser } from "./components/FormUser"; // Importa correctamente
+import { FormUser } from "./components/FormUser"; 
 
 function App() {
   return (
