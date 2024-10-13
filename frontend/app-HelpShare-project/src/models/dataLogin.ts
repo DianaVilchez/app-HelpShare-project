@@ -1,7 +1,6 @@
 export type dataLogin = {
     email: string;
     password: string;
-    description: string;
 };
 
 export type dataRegister = {

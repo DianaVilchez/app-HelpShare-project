@@ -20,6 +20,7 @@ export const useRegisterConnection = () => {
 
       const data = await response.json();
       localStorage.setItem("username", data.username);
+      localStorage.setItem("description", data.description);
       navigate(`/profile/${data.username}`);
     } catch (error) {
       console.error("Error durante el registro", (error as Error).message);
