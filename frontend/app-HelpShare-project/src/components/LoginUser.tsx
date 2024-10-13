@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Login } from "./login";
+import { Login } from "./Login";
 import { useLoginConnection } from "../Services/loginConnection"; // Importa el hook correctamente
 
 export const LoginUser = () => {
