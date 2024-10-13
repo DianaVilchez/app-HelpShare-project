@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import logo from "../assets/logo_HelpShare.png";
+import '../styles/profile.css';
 
 export const UserProfile = () => {
     const {username} = useParams<{username:string}>()
